@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import Info from "../components/ui/Info";
+import Stats from "../components/Stats";
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
@@ -33,6 +34,7 @@ const Dashboard = () => {
   ) : (
     <div className="px-0 md:px-5 2xl:px-20">
       <Info title="Dashboard" subtitle="Monitor your financial activities" />
+      <Stats />
     </div>
   );
 };
