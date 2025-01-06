@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import Info from "../components/ui/Info";
 import Stats from "../components/Stats";
+import Chart from "../components/Chart";
+import DoughnutChart from "../components/PieChart";
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
@@ -35,6 +37,18 @@ const Dashboard = () => {
     <div className="px-0 md:px-5 2xl:px-20">
       <Info title="Dashboard" subtitle="Monitor your financial activities" />
       <Stats />
+      <div className="flex flex-col-reverse items-center gap-10 w-full md:flex-row">
+        <Chart data={data.chartData} />
+        {!data.totalIncome && (
+          <DoughnutChart
+            dt={{
+              balance: data.availableBalance,
+              income: data.totalIncome,
+              expense: data.totalExpense,
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 };
