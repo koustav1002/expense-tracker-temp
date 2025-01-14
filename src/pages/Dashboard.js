@@ -6,6 +6,7 @@ import Info from "../components/ui/Info";
 import Stats from "../components/Stats";
 import Chart from "../components/Chart";
 import DoughnutChart from "../components/PieChart";
+import RecentTransactions from "../components/RecentTransactions";
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
@@ -48,6 +49,9 @@ const Dashboard = () => {
             }}
           />
         )}
+      </div>
+      <div className="flex flex-col-reverse gap-0 md:flex-row md:gap-10 2xl:gap-20">
+        <RecentTransactions data={data} />
       </div>
     </div>
   );
