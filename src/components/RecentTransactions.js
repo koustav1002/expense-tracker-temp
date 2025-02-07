@@ -92,7 +92,7 @@ const RecentTransactions = ({ data }) => {
                 </td>
                 <td className="px-2 py-3">
                   <div className="flex flex-col">
-                    <p className="text-base font-sm text-black 2xl:text-lg line-clamp-1">
+                    <p className="text-base font-medium text-black line-clamp-1">
                       {item.description}
                     </p>
                   </div>
