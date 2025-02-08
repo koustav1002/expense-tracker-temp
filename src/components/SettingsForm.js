@@ -76,7 +76,7 @@ const SettingsForm = () => {
           variant="outline"
           loading={loading}
           type="reset"
-          className="px-8 bg-red-700 text-white"
+          className="px-8 bg-violet-700 text-white"
         >
           {loading ? <BiLoader className="animate-spin text-white" /> : "Save"}
         </Button>
