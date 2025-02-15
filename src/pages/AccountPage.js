@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import { MdAdd, MdVerifiedUser } from "react-icons/md";
 import AccountMenu from "../components/AccountMenu";
+import { maskAccount } from "../store/utils";
+import AddAccount from "../components/AddAccount";
 
 const ICONS = {
   crypto: (
@@ -34,6 +36,8 @@ const ICONS = {
 const dummyData = [
   {
     account_name: "Cash",
+    account_number: "11439929040",
+    createdAt: "12-05-2024",
   },
 ];
 
@@ -69,68 +73,113 @@ const AccountPage = () => {
     fetchAccount();
   }, []);
 
-  const handleOpenAddMoney = async (acc) => {};
+  const handleOpenAddMoney = (el) => {
+    setSelectedAccount(el?.id);
+    setIsOpenTopup(true);
+  };
 
-  const handleTransfermoney = async (acc) => {};
+  const handleTransfermoney = (el) => {
+    setSelectedAccount(el?.id);
+    setIsOpenTransfer(true);
+  };
 
   return (
     <>
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="w-full py-10">
-          <div className="flex items-center justify-between">
-            <p className="text-2xl 2xl:text-3xl font-semibold text-gray-600 mb-5">
-              Accounts Information
-            </p>
+        <>
+          <div className="w-full py-10">
+            <div className="flex items-center justify-between">
+              <p className="text-2xl 2xl:text-3xl font-semibold text-gray-600 mb-5">
+                Accounts Information
+              </p>
 
-            <div className="flex items-center gap-4">
-              <button className="py-1.5 px-2 rounded bg-black text-white flex items-center justify-center gap-2 border border-gray-500">
-                <MdAdd size={22} />
-                <span className="">Add</span>
-              </button>
-            </div>
-          </div>
-
-          {data?.length === 0 ? (
-            <>
-              {" "}
-              <div className="w-full flex items-center justify-center py-10 text-gray-600 text-lg">
-                <span>No Account Found</span>
-              </div>
-            </>
-          ) : (
-            <div className="w-full grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 py-10 gap-6">
-              {data?.map((acc, index) => (
-                <div
-                  key={index}
-                  className="w-full h-48 flex gap-4 bg-gray-50 p-3 rounded shadow"
+              <div className="flex items-center gap-4">
+                <button
+                  className="py-1.5 px-2 rounded bg-black text-white flex items-center justify-center gap-2 border border-gray-500"
+                  onClick={() => setIsOpen(true)}
                 >
-                  <div>{ICONS[acc?.account_name?.toLowerCase()]}</div>
+                  <MdAdd size={22} />
+                  <span className="">Add</span>
+                </button>
+              </div>
+            </div>
 
-                  <div className="space-y-2 w-full">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <p className="text-black text-2xl font-bold">
-                          {acc?.account_name}
-                        </p>
+            {data?.length === 0 ? (
+              <>
+                {" "}
+                <div className="w-full flex items-center justify-center py-10 text-gray-600 text-lg">
+                  <span>No Account Found</span>
+                </div>
+              </>
+            ) : (
+              <div className="w-full grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 py-10 gap-6">
+                {data?.map((acc, index) => (
+                  <div
+                    key={index}
+                    className="w-full h-48 flex gap-4 bg-gray-50 p-3 rounded shadow"
+                  >
+                    <div>{ICONS[acc?.account_name?.toLowerCase()]}</div>
 
-                        <MdVerifiedUser
-                          size={26}
-                          className="text-emerald-600 ml-1"
+                    <div className="space-y-2 w-full">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <p className="text-black text-2xl font-bold">
+                            {acc?.account_name}
+                          </p>
+
+                          <MdVerifiedUser
+                            size={26}
+                            className="text-emerald-600 ml-1"
+                          />
+                        </div>
+                        <AccountMenu
+                          addMoney={() => handleOpenAddMoney(acc)}
+                          transferMoney={() => handleTransfermoney(acc)}
                         />
                       </div>
-                      <AccountMenu
-                        addMoney={() => handleOpenAddMoney(acc)}
-                        transferMoney={() => handleTransfermoney(acc)}
-                      />
+
+                      <span className="text-gray-600 font-light leading-loose">
+                        {maskAccount(acc?.account_number)}
+                      </span>
+
+                      <p className="text-xs text-gray-600">
+                        {new Date(acc?.createdAt).toLocaleDateString("en-US", {
+                          dateStyle: "full",
+                        })}
+                      </p>
+
+                      <div className="flex items-center justify-between">
+                        <p className="text-xl text-gray-600 font-medium">
+                          {acc?.account_balance}
+                        </p>
+                        <button
+                          onClick={() => handleOpenAddMoney(acc)}
+                          className="text-sm mr-6 outline-none text-violet-600 hover:underline"
+                        >
+                          Add Money
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <AddAccount
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            id={selectedAccount}
+            refetch={fetchAccount}
+            key={new Date().getTime()}
+          />
+
+          {/* <AddMoney isOpen={isOpenTopup} setIsOpen={s1etIsOpenTopup} id={selectedAccount} refetch={fetchAccount} key={new Date().getTime() + 1}/> */}
+
+          {/* <TransferMoney isOpen={isOpenTransfer} setIsOpen={setIsOpenTransfer} id={selectedAccount} refetch={fetchAccount} key={new Date().getTime() + 2}/> */}
+        </>
       )}
     </>
   );
