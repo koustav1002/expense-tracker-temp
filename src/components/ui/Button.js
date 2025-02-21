@@ -2,7 +2,7 @@ import React from "react";
 import clsx from "clsx";
 
 const variantClasses = {
-  default: "bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500",
+  default: "text-white hover:bg-indigo-700 focus:ring-indigo-500",
   outline:
     "hover:bg-gray-50 hover:text-gray-700 focus:ring-indigo-500 border border-gray-200",
   ghost: "bg-transparent hover:bg-gray-100 text-gray-700",

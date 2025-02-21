@@ -9,6 +9,8 @@ import { MdAdd, MdVerifiedUser } from "react-icons/md";
 import AccountMenu from "../components/AccountMenu";
 import { maskAccount } from "../store/utils";
 import AddAccount from "../components/AddAccount";
+import AddMoney from "../components/AddAccountMoney";
+import TransferMoney from "../components/TransferMoney";
 
 const ICONS = {
   crypto: (
@@ -176,9 +178,15 @@ const AccountPage = () => {
             key={new Date().getTime()}
           />
 
-          {/* <AddMoney isOpen={isOpenTopup} setIsOpen={s1etIsOpenTopup} id={selectedAccount} refetch={fetchAccount} key={new Date().getTime() + 1}/> */}
+          <AddMoney
+            isOpen={isOpenTopup}
+            setIsOpen={setIsOpenTopup}
+            id={selectedAccount}
+            refetch={fetchAccount}
+            key={new Date().getTime() + 1}
+          />
 
-          {/* <TransferMoney isOpen={isOpenTransfer} setIsOpen={setIsOpenTransfer} id={selectedAccount} refetch={fetchAccount} key={new Date().getTime() + 2}/> */}
+          <TransferMoney isOpen={isOpenTransfer} setIsOpen={setIsOpenTransfer} id={selectedAccount} refetch={fetchAccount} key={new Date().getTime() + 2}/>
         </>
       )}
     </>
