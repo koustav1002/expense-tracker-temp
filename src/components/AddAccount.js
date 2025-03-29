@@ -18,7 +18,7 @@ const AddAccount = ({ isOpen, setIsOpen, id, refetch, key }) => {
   const {
     register,
     handleSubmit,
-    formState: { erros },
+    formState: { errors },
   } = useForm({
     defaultValues: { account_number: generateAccountNumber() },
   });
