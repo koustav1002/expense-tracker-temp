@@ -10,6 +10,7 @@ import DateRange from "../components/DateRange";
 import { RiProgress3Line } from "react-icons/ri";
 import { TiWarning } from "react-icons/ti";
 import ViewTransaction from "../components/ViewTransaction";
+import AddTransaction from "../components/AddTransaction";
 
 const Transactions = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -178,7 +179,7 @@ const Transactions = () => {
           </div>
         </div>
       )}
-      {/* <AddTransaction isOpen={isOpen} setIsOpen = {setIsOpen} refetch={fetchTransactions} key={new Date().getTime()}/> */}
+      <AddTransaction isOpen={isOpen} setIsOpen = {setIsOpen} refetch={fetchTransactions} key={new Date().getTime()}/>
       <ViewTransaction data={selected} isOpen={isOpenView} setIsOpen={setIsOpenView}/>
     </>
   );
